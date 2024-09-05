@@ -43,9 +43,20 @@ async function sendTransactions() {
     for (const { address, privateKey } of addresses) {
         const wallet = new ethers.Wallet(privateKey, provider);
 
-        // Kirim dua transaksi dengan data hex yang berbeda
-        await sendTransaction(wallet, data1, `1 for ${address}`);
-        await sendTransaction(wallet, data2, `2 for ${address}`);
+        try {
+            // Kirim dua transaksi dengan data hex yang berbeda
+            await sendTransaction(wallet, data1, `1 for ${address}`);
+        } catch (error) {
+            console.error(`Error in Transaction 1 for ${address}:`, error);
+            continue; // Lanjut ke address berikutnya jika terjadi error
+        }
+
+        try {
+            await sendTransaction(wallet, data2, `2 for ${address}`);
+        } catch (error) {
+            console.error(`Error in Transaction 2 for ${address}:`, error);
+            continue; // Lanjut ke address berikutnya jika terjadi error
+        }
     }
 }
 
