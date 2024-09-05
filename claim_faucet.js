@@ -7,7 +7,7 @@ const provider = new ethers.providers.JsonRpcProvider('https://betanet-rpc1.arte
 // Ambil semua variabel dari environment
 const getAddressesAndKeys = () => {
     const addresses = [];
-    let index = 11; // dimulai dari wallet berapa
+    let index = 1; // dimulai dari wallet berapa
     while (process.env[`ADDRESS_${index}`] && process.env[`PRIVATE_KEY_${index}`]) {
         addresses.push({
             address: process.env[`ADDRESS_${index}`],
